@@ -1,10 +1,15 @@
 import {useState,useEffect,createContext} from "react";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const PacientesContext = createContext();
 
 export const PacientesProvider = ({children})=>{
 
+
+    const {auth} = useAuth();
+
+    const [isLoading, setIsLoading] = useState(true)
     const [pacientes,setPacientes] = useState([]);
     const [paciente,setPaciente] = useState({});
 
@@ -14,8 +19,8 @@ export const PacientesProvider = ({children})=>{
             try {
                
                 const token = localStorage.getItem('token');
+                
                 if(!token) return;
-
                 // ** Realizar la consulta
                 // Configuracion de permiso header
                 const config = {
@@ -24,16 +29,17 @@ export const PacientesProvider = ({children})=>{
                         Authorization: `Bearer ${token}`
                     }
                 }
-                const url = 'http://localhost:4000/api/pacientes/listar';
-                const {data} = await axios.get(url,config);
 
+                const url = 'https://morning-sierra-05026.herokuapp.com/api/pacientes/listar';
+                const {data} = await axios.get(url,config);
                 setPacientes(data.mensaje);
+                setIsLoading(false);
             } catch (error) {
                 console.log(error);
             }
         }
         obtenerPacientes();
-    }, [])
+    }, [auth])
     
 
     // Funcion para guardar paciente
@@ -51,7 +57,6 @@ export const PacientesProvider = ({children})=>{
         info.append('sintomas', sintomas);
 
         if (id) {
-            console.log(id);
             info.append('id', id);
         }else{
             info.append('id', '')
@@ -66,7 +71,7 @@ export const PacientesProvider = ({children})=>{
         }
         
         try {
-            const url = 'http://localhost:4000/api/pacientes/agregar';
+            const url = 'https://morning-sierra-05026.herokuapp.com/api/pacientes/agregar';
             const {data} = await axios.post(url,info,config);
 
             if (data.actualizado === false) {
@@ -87,7 +92,7 @@ export const PacientesProvider = ({children})=>{
 
     // Eliminar Paciente
     const eliminarPaciente = async(id)=>{
-        const url = 'http://localhost:4000/api/pacientes/eliminar';
+        const url = 'https://morning-sierra-05026.herokuapp.com/api/pacientes/eliminar';
         const datos = new FormData();
         datos.append('id', id)
 
@@ -112,6 +117,7 @@ export const PacientesProvider = ({children})=>{
     return (
         <PacientesContext.Provider
             value={{
+                isLoading,
                 pacientes,
                 paciente,
                 guardarPaciente,

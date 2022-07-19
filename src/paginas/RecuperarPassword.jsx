@@ -17,7 +17,7 @@ const RecuperarPassword = () => {
     const enviarToken = async()=>{
       const datos = new FormData();
       datos.append('token', parametro.token);
-      const url = `http://localhost:4000/api/veterinarios/establecer-password?token=${parametro.token}`;
+      const url = `https://morning-sierra-05026.herokuapp.com/api/veterinarios/establecer-password?token=${parametro.token}`;
       try {
         const respuesta = await fetch(url);
         const resultado = await respuesta.json();

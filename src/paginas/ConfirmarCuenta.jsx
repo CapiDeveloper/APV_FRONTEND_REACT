@@ -20,7 +20,7 @@ const ConfirmarCuenta = () => {
   useEffect(()=>{
       const confirmarCuenta = async()=>{
         try {
-          const url = `http://localhost:4000/api/veterinarios/confirmar?token=${token}`;
+          const url = `https://morning-sierra-05026.herokuapp.com/api/veterinarios/confirmar?token=${token}`;
           const respuesta = await fetch(url);
           const resultado = await respuesta.json();
           console.log(resultado.detalle);

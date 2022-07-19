@@ -14,7 +14,7 @@ const OlvidePassword = () => {
       setAlerta({mensaje:'El email es obligatorio',error:true});
       return;
     }
-    const url = 'http://localhost:4000/api/veterinarios/olvide-password';
+    const url = 'https://morning-sierra-05026.herokuapp.com/api/veterinarios/olvide-password';
     const datos = new FormData();
     datos.append('email', email)
     try {

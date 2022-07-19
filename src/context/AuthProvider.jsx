@@ -19,7 +19,7 @@ const AuthProvider =  ({children})=>{
                 return;
             };
 
-            const url = 'http://localhost:4000/api/veterinarios/perfil';
+            const url = 'https://morning-sierra-05026.herokuapp.com/api/veterinarios/perfil';
             const config = {
                 headers:{
                     'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const AuthProvider =  ({children})=>{
             try {
                 const {data} = await axios(url,config);
                 setAuth(data);
-
+                console.log(data);
             } catch (error) {
                 console.log('No se logra conectar al backend');
             }
@@ -44,7 +44,7 @@ const AuthProvider =  ({children})=>{
             mensaje:'',
             valido:true
         }
-        const url = 'http://localhost:4000/api/veterinarios/actualizar-perfil';
+        const url = 'https://morning-sierra-05026.herokuapp.com/api/veterinarios/actualizar-perfil';
         const datos = new FormData();
         datos.append('id', veterinario.id);
         datos.append('nombre', veterinario.nombre);
@@ -70,7 +70,7 @@ const AuthProvider =  ({children})=>{
 
     const guardarPassword = async(info)=>{
 
-        const url = 'http://localhost:4000/api/veterinarios/actualizar-password';
+        const url = 'https://morning-sierra-05026.herokuapp.com/api/veterinarios/actualizar-password';
 
         const datos = new FormData();
         datos.append('actual', info.pwd_actual);

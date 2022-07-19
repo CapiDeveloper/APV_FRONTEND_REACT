@@ -37,7 +37,7 @@ const Registrar = () => {
     datos.append('email', email);
     datos.append('password', password);
     try {
-      const url = 'http://localhost:4000/api/veterinarios';
+      const url = 'https://morning-sierra-05026.herokuapp.com/api/veterinarios';
       const respuesta = await fetch(url,{
         method:"POST",
         body:datos

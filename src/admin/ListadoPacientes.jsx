@@ -3,7 +3,7 @@ import Paciente  from "./../componentes/Paciente";
 
 const ListadoPacientes = () => {
 
-    const {pacientes} = usePacientes();
+    const {pacientes, isLoading} = usePacientes();
 
   return (
         <>
@@ -12,7 +12,7 @@ const ListadoPacientes = () => {
             <h2 className="font-black text-3xl text-center">Listado de pacientes</h2>
             <p className="text-xl mt-2 mb-10 text-center">Administra tus <span className="font-bold text-indigo-600"> pacientes y citas</span></p>
             
-            {pacientes.map( paciente =>(
+            { !isLoading&& pacientes.map( paciente =>(
               <Paciente 
                 key={paciente.id}
                 paciente={paciente}
